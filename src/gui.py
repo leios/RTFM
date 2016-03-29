@@ -99,27 +99,35 @@ def dialogue(textbox, text, sleep_time):
     row_num = 1
     for word in words:
         wordcols = wordcols + len(word + " ")
-        if wordcols < tbcols - 2:
-            textbox.addstr(row_num, wordcols - len(word + " "), word + " ")
-            textbox.refresh()
-            time.sleep(sleep_time)
+        if (word == '\\n'):
+            # newlines will add columns to the end so that we change lines in
+            # the next if condition block
+            wordcols = tbcols
         else:
-            # additional command necessary tio proceed, if we are at row 2
-            if row_num == 2:
-                # waits for command
-                continue_text(textbox, tbcols)
-                row_num = 1
+            if wordcols < tbcols - 2:
+                textbox.addstr(row_num, wordcols - len(word + " "), word + " ")
+                textbox.refresh()
+                time.sleep(sleep_time)
             else:
-                row_num = 2
-            wordcols = 2
-            textbox.addstr(row_num, wordcols, word + " ")
-            wordcols = wordcols + len(word + " ")
-            textbox.refresh()
-            time.sleep(sleep_time)
+                # additional command necessary to proceed, if we are at row 2
+                if row_num == 2:
+                    # waits for command
+                    continue_text(textbox, tbcols)
+                    row_num = 1
+                else:
+                    row_num = 2
+                wordcols = 2
+                textbox.addstr(row_num, wordcols, word + " ")
+                wordcols = wordcols + len(word + " ")
+                textbox.refresh()
+                time.sleep(sleep_time)
 
     textbox.refresh()
 
 def continue_text(textbox, cols):
+    # flush input from buffer
+    curses.flushinp()
+
     # indicates button to press:
     button = "PRESS SPACE"
     textbox.addstr(3, cols - 2 - len(button), button)

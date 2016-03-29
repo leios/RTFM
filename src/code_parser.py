@@ -33,5 +33,5 @@ bg = init_bg()
 textbox = init_textbox(bg)
 codebox = init_codebox(bg)
 
-parse("example.cpp", textbox, codebox, 0.1) 
+parse("example.py", textbox, codebox, 0.1) 
 kill_curses(bg, textbox)
