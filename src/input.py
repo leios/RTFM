@@ -64,7 +64,7 @@ def browse_code(textbox, codebox, bg, line_list, sleep_time):
 
     # Requesting user input before stopping
     dialogue(textbox, 
-             "press SPACE to end \\n press UP to go up and DOWN to go down", 0)
+             "press SPACE to end \\n press 'w' to go up and 's' to go down", 0)
 
     # request user input for moving up and down on the screen
     index = 0
